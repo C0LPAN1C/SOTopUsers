@@ -87,8 +87,8 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" horizontalHuggingPriority="692" verticalHuggingPriority="769" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-kO-V7S">
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <webView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="692" verticalHuggingPriority="769" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-kO-V7S">
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="436" id="w7R-Rg-9fT"/>

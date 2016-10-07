@@ -34,7 +34,7 @@
     NSString *silverBadges = [badges objectForKey:@"silver"];
     NSString *bronzeBadges = [badges objectForKey:@"bronze"];
     
-    return [NSString stringWithFormat:@"<font face='Arial' color='white'><center><b><font color='gold'>● </b></font>%@ <font color='silver'><b>● </b></font>%@ <font color='bronze'><b>● </b></font>%@</center></font>",
+    return [NSString stringWithFormat:@"<font face='Arial' color='white'><center><b><font color='gold'>● </b></font>%@ <font color='silver'><b>● </b></font>%@ <font color='bronze'><b>● </b></font>%@</center></font><br><br>",
                               goldBadges,
                               silverBadges,
                               bronzeBadges];
