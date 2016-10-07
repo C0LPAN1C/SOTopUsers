@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A9886E48177A027C009C4356"
-               BuildableName = "MMJStackiOSView.app"
-               BlueprintName = "MMJStackiOSView"
-               ReferencedContainer = "container:MMJStackiOSView.xcodeproj">
+               BuildableName = "SOTopUsers.app"
+               BlueprintName = "SOTopUsers"
+               ReferencedContainer = "container:SOTopUsers.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A9886E48177A027C009C4356"
-            BuildableName = "MMJStackiOSView.app"
-            BlueprintName = "MMJStackiOSView"
-            ReferencedContainer = "container:MMJStackiOSView.xcodeproj">
+            BuildableName = "SOTopUsers.app"
+            BlueprintName = "SOTopUsers"
+            ReferencedContainer = "container:SOTopUsers.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A9886E48177A027C009C4356"
-            BuildableName = "MMJStackiOSView.app"
-            BlueprintName = "MMJStackiOSView"
-            ReferencedContainer = "container:MMJStackiOSView.xcodeproj">
+            BuildableName = "SOTopUsers.app"
+            BlueprintName = "SOTopUsers"
+            ReferencedContainer = "container:SOTopUsers.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A9886E48177A027C009C4356"
-            BuildableName = "MMJStackiOSView.app"
-            BlueprintName = "MMJStackiOSView"
-            ReferencedContainer = "container:MMJStackiOSView.xcodeproj">
+            BuildableName = "SOTopUsers.app"
+            BlueprintName = "SOTopUsers"
+            ReferencedContainer = "container:SOTopUsers.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
