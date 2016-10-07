@@ -11,7 +11,7 @@
 
 @interface SOViewController ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *questionWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *WebView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activitySpinner;
 
 @end
@@ -58,7 +58,7 @@
         
         NSString *body = [self grabUserInformation];
 
-        [self.questionWebView loadHTMLString:body baseURL:[NSURL URLWithString:@"about:none"]];
+        [self.WebView loadHTMLString:body baseURL:[NSURL URLWithString:@"about:none"]];
         [self.activitySpinner stopAnimating];
     } else {
         self.userBody = nil;
@@ -148,7 +148,7 @@
 - (IBAction)shareButtonTest:(id)sender {
     NSLog(@"Sharing Data");
     
-    NSData *compressedImage = [self getImageFromView:self.questionWebView];
+    NSData *compressedImage = [self getImageFromView:self.WebView];
     NSString *docsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *imagePath = [docsPath stringByAppendingPathComponent:@"image.png"];
     NSURL *imageUrl     = [NSURL fileURLWithPath:imagePath];
