@@ -41,9 +41,48 @@
     
 }
 
+
+- (void)downloadImage:(NSString *)url userid:(NSString *)uid {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"Downloading Started");
+        NSString *urlToDownload = url;
+        NSURL  *url = [NSURL URLWithString:urlToDownload];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        if ( urlData )
+        {
+            NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString  *documentsDirectory = [paths objectAtIndex:0];
+            
+            NSString  *filePath = [NSString stringWithFormat:@"%@/%@%@", documentsDirectory,uid,@".png"];
+            
+                    //saving is done on main thread
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    [urlData writeToFile:filePath atomically:YES];
+                        NSLog(@"File Saved !");
+                        [self loadUserBody];
+                });
+            
+        }
+        
+    });
+}
+
 - (NSString *)grabUserInformation {
+    NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *documentsDirectory = [paths objectAtIndex:0];
+    NSString  *filePath = [NSString stringWithFormat:@"%@/%@%@", documentsDirectory,self.user[SO_USER_ACCOUNT_ID],@".png"];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:filePath])
+        [self downloadImage:self.user[SO_USER_IMAGE_URL] userid:self.user[SO_USER_ACCOUNT_ID]];
+    
+    NSString* URLPath = [NSString stringWithFormat:@"%@.png",self.user[SO_USER_ACCOUNT_ID]];
+    
+    if (!URLPath) {
+        URLPath = self.user[SO_USER_IMAGE_URL];
+    }
+
     return [NSString stringWithFormat:@"<body  bgcolor=\"black\"><table><tr><th><img src=\"%@\"></th><th></th><th align='left'></b><b><font face='Arial' color='white'><font align='left'>   Account ID: </b>%@</div><br><b>  Reputation: </b>%@<br><b>   Location: </b>%@<br><b>   Age: </b>%@ (yrs)<br><a href=\"%@\">    Profile URL</a></left></font></th></tr>%@</table></body>",
-            self.user[SO_USER_IMAGE_URL],
+            URLPath,
             self.user[SO_USER_ACCOUNT_ID],
             self.user[SO_USER_REPUTATION],
             self.user[SO_USER_LOCATION],
@@ -57,8 +96,10 @@
         [self.activitySpinner startAnimating];
         
         NSString *body = [self grabUserInformation];
-
-        [self.WebView loadHTMLString:body baseURL:[NSURL URLWithString:@"about:none"]];
+        NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString  *documentsDirectory = [paths objectAtIndex:0];
+        NSURL *baseURL = [NSURL fileURLWithPath:documentsDirectory];
+        [self.WebView loadHTMLString:body baseURL:baseURL];
         [self.activitySpinner stopAnimating];
     } else {
         self.userBody = nil;
