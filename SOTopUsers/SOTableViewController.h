@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SOTableViewController : UITableViewController
-
+@interface SOTableViewController : UITableViewController <UITextFieldDelegate>
 @property (nonatomic, strong) NSArray *soUsers; //of NSDictionary
-
+@property (nonatomic, strong) IBOutlet UITextField *searchBox;
+- (IBAction)searchButton:(id)sender;
 @end
+

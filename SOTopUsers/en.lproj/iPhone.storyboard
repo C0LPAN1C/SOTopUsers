@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--STACK OVERFLOW TOP USERS-->
+        <!--Controller-->
         <scene sceneID="1ZG-7F-fBb">
             <objects>
                 <tableViewController wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="saR-b1-nga" customClass="SOController" sceneMemberID="viewController">
@@ -56,9 +56,25 @@
                             <outlet property="delegate" destination="saR-b1-nga" id="JaA-Rf-K09"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="STACK OVERFLOW TOP USERS" id="CYe-l9-njH">
+                    <navigationItem key="navigationItem" id="CYe-l9-njH">
+                        <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="Back" id="zzZ-CN-6kD">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter User Search Criteria" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" id="YFM-ta-tk0">
+                            <rect key="frame" x="8" y="7" width="316" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                        </textField>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="gO3-L2-9P3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="searchButton:" destination="saR-b1-nga" id="on7-US-3vv"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -70,6 +86,9 @@
                         <attributedString key="attributedTitle"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </refreshControl>
+                    <connections>
+                        <outlet property="searchBox" destination="YFM-ta-tk0" id="Mvq-LZ-xQg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cM-so-66Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -87,7 +106,8 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="692" verticalHuggingPriority="769" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-kO-V7S">
+                            <webView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="692" verticalHuggingPriority="769" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-kO-V7S">
+                                <frame key="frameInset" width="375" height="623"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -126,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5tn-6l-rT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="862" y="-12"/>
+            <point key="canvasLocation" x="861.5" y="-12.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WZ6-Ml-ohJ">

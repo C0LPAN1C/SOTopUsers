@@ -22,7 +22,10 @@
 
 + (NSDictionary *)executeSOFetch;
 + (NSDictionary *)executeSOFetch:(NSString *)URL;
++ (NSDictionary *)executeSOSearch:(NSString *)searchCriteria;
 + (NSArray *)topSOUsers;
-+ (NSDictionary *)getUser:(NSArray *)questions atIndex:(NSUInteger)index;
-
++ (NSArray *)searchSOUsers:(NSString * )seachCriteria;
++ (NSDictionary *)getUser:(NSArray *)user atIndex:(NSUInteger)index;
++ (void)setSearchCriteria:(NSString *)searchCriteria;
++ (NSString *) fetchSearchCriteria;
 @end

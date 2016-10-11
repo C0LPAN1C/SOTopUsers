@@ -9,8 +9,18 @@
 #import "SOFetcher.h"
 
 #define STACKOVERFLOW_URL @"https://api.stackexchange.com/2.2/users?site=stackoverflow"
+#define STACKOVERFLOW_SEARCH_URL @"https://api.stackexchange.com/2.2/users?order=desc&sort=reputation&inname=*search_criteria*&site=stackoverflow"
 
 @implementation SOFetcher
+NSString* _search;
+
++ (NSString *)fetchSearchCriteria {
+    return _search;
+}
+
++ (void)setSearchCriteria:(NSString *)searchCriteria {
+    _search = searchCriteria;
+}
 
 + (NSDictionary *)executeSOFetch:(NSString *)URL {
     NSLog(@"fetching %@", URL);
@@ -26,12 +36,21 @@
     return results;
 }
 
++ (NSDictionary *)executeSOSearch:(NSString *)searchCriteria {
+    searchCriteria = [searchCriteria stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSString* searchString = [STACKOVERFLOW_SEARCH_URL stringByReplacingOccurrencesOfString:@"*search_criteria*" withString:searchCriteria];
+    return [self executeSOFetch:searchString];
+}
+
 + (NSDictionary *)executeSOFetch {
     return [self executeSOFetch:STACKOVERFLOW_URL];
 }
 
 + (NSArray *)topSOUsers {
     return [[self executeSOFetch] valueForKeyPath:SO_ITEMS];
+}
++ (NSArray *)searchSOUsers:(NSString*) searchCriteria {
+    return [[self executeSOSearch:searchCriteria] valueForKeyPath:SO_ITEMS];
 }
 
 + (NSDictionary *)getUser:(NSArray *)user atIndex:(NSUInteger)index {

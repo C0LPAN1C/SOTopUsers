@@ -48,12 +48,11 @@
         NSString *urlToDownload = url;
         NSURL  *url = [NSURL URLWithString:urlToDownload];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
-        if ( urlData )
-        {
-            NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString  *documentsDirectory = [paths objectAtIndex:0];
+        if ( urlData ) {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
             
-            NSString  *filePath = [NSString stringWithFormat:@"%@/%@%@", documentsDirectory,uid,@".png"];
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@%@", documentsDirectory,uid,@".png"];
             
                     //saving is done on main thread
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -125,9 +124,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateUI];
-	//need to call updateUI, because when segue is calling setQuestion, IBOutlets are nil
-
 }
+
 - (void)presentActivityController:(UIActivityViewController *)controller {
     controller.modalPresentationStyle = UIModalPresentationPopover;
     [self presentViewController:controller animated:YES completion:nil];
@@ -159,8 +157,7 @@
     };
 }
 
--(NSData *)getImageFromView:(UIView *)view  // Mine is UIWebView but should work for any
-{
+-(NSData *)getImageFromView:(UIView *)view {
     NSData *pngImg;
     CGFloat max, scale = 1.0;
     CGSize viewSize = [view bounds].size;
@@ -191,7 +188,8 @@
     
     NSData *compressedImage = [self getImageFromView:self.WebView];
     NSString *docsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *imagePath = [docsPath stringByAppendingPathComponent:@"image.png"];
+    NSString *fileName = [NSString stringWithFormat:@"%@.png",self.user[SO_USER_ACCOUNT_ID]];
+    NSString *imagePath = [docsPath stringByAppendingPathComponent:fileName];
     NSURL *imageUrl     = [NSURL fileURLWithPath:imagePath];
     
     [compressedImage writeToURL:imageUrl atomically:YES]; // save the file

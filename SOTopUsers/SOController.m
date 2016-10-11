@@ -24,8 +24,13 @@
     [self showBeginningAlert];
 }
 
+- (void)refreshController {
+    NSLog(@"%@",@"Should refresh!");
+    [self loadTopSOUsers];
+}
+
 - (void)showBeginningAlert {
-    UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"Welcome to Stack Overflow Top Users. Click a record to view more details."  message:nil  preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"Welcome to Stack Overflow Top Users. Click a record to view more details or search users by typing in Search Criteria and pressing search or the search icon."  message:nil  preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
@@ -34,6 +39,27 @@
 
 - (void)loadTopSOUsers {
     [self.refreshControl beginRefreshing];
+    if ([SOFetcher fetchSearchCriteria].length < 1) {
+        [self displayTopUsers];
+    } else {
+        [self displaySearch];
+    }
+}
+- (void)displaySearch {
+    dispatch_queue_t loadSO= dispatch_queue_create("search users", NULL);
+    dispatch_async(loadSO, ^{
+        [self showThis];
+        NSArray *topSOUsers = [SOFetcher searchSOUsers:[SOFetcher fetchSearchCriteria]];
+        [self hideThis];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.soUsers = topSOUsers;
+            [self.refreshControl endRefreshing];
+        });
+    });
+}
+
+- (void)displayTopUsers {
     dispatch_queue_t loadSO= dispatch_queue_create("top users", NULL);
     dispatch_async(loadSO, ^{
         [self showThis];
@@ -46,6 +72,22 @@
         });
     });
 }
+
+- (void)searchSOUsers: (NSString*) searchCriteria {
+    [self.refreshControl beginRefreshing];
+    dispatch_queue_t loadSO= dispatch_queue_create("top users", NULL);
+    dispatch_async(loadSO, ^{
+        [self showThis];
+        NSArray *topSOUsers = [SOFetcher searchSOUsers:(NSString*)searchCriteria];
+        [self hideThis];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.soUsers = topSOUsers;
+            [self.refreshControl endRefreshing];
+        });
+    });
+}
+
 
 - (void)mutateCounter:(NSUInteger)change {
     static NSUInteger counter = 0;

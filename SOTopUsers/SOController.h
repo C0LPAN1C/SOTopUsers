@@ -13,5 +13,5 @@
 - (void)showThis;
 - (void)hideThis;
 - (void)mutateCounter:(NSUInteger)change;
-
+- (void)refreshController;
 @end
